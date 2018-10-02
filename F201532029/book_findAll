@@ -1,0 +1,19 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `book_findAll`(
+  IN firstRecordIndex INT,
+  IN pageSize INT,
+  IN ss VARCHAR(10),
+  IN st NVARCHAR(100)
+)
+BEGIN
+
+select b.*, c.categoryName, p.title publisherName
+from book b
+left join category c on c.id=b.categoryId
+left join publisher p on p.id=b.publisherId
+WHERE 
+  (ss = '0') OR
+  (ss = '1' AND b.title LIKE concat('%',st,'%')) OR
+  (ss = '2' AND c.categoryName LIKE concat(st))
+LIMIT firstRecordIndex, pageSize;
+  
+END

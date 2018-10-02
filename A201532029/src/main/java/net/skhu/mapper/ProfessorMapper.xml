@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.ProfessorMapper">
+
+
+  <select id="findAll" resultType="Professor">
+    SELECT p.id, p.professorName, d.departmentName
+    FROM Professor p LEFT JOIN Department d  on p.departmentId=d.id;
+  </select>
+  
+  
+  <select id="findByProfessorId" resultType="Professor">
+    SELECT p.id, p.professorName, d.departmentName
+    FROM Professor p LEFT JOIN Department d  on p.departmentId=d.id
+    WHERE p.id = #{id}
+  </select>
+  
+    <select id="findBydepartmentId" resultType="Professor"> 
+    SELECT p.id, p.professorName, d.departmentName
+    FROM Professor p LEFT JOIN Department d  on p.departmentId=d.id
+    WHERE p.departmentId = #{departmentId}
+  </select>   
+  
+  
+
+</mapper>
